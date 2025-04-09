@@ -9,7 +9,6 @@ import com.banking_app.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,6 +67,6 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new AccountException("Account does not exits"));
-       accountRepository.deleteById(id);
+        accountRepository.deleteById(id);
     }
 }
