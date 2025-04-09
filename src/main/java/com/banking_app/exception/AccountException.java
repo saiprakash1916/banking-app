@@ -1,8 +1,8 @@
 package com.banking_app.exception;
 
-public class AccountException extends RuntimeException{
+public class AccountException extends RuntimeException {
 
-    public AccountException(String message){
+    public AccountException(String message) {
         super(message);
     }
 }

@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     // Handle Specific Exception - AccountException
     @ExceptionHandler(AccountException.class)
-    public ResponseEntity<ErrorDetails> handleAccountException(AccountException exception, WebRequest request){
+    public ResponseEntity<ErrorDetails> handleAccountException(AccountException exception, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     // Handle Generic Exception
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> handleGenericException(AccountException exception, WebRequest request){
+    public ResponseEntity<ErrorDetails> handleGenericException(AccountException exception, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
