@@ -18,17 +18,20 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    // creating new Account
     @PostMapping("/addAccount")
     public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto) {
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
 
+    // Getting account details by id
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id) {
         AccountDto accountDto = accountService.getAccountById(id);
         return ResponseEntity.ok(accountDto);
     }
 
+    // Add amount to the particular account
     @PutMapping("/{id}/deposit")
     public ResponseEntity<AccountDto> deposit(@PathVariable Long id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("amount");
@@ -36,6 +39,7 @@ public class AccountController {
         return ResponseEntity.ok(accountDto);
     }
 
+    // Withdraw the amount from the account
     @PutMapping("/{id}/withdraw")
     public ResponseEntity<AccountDto> withdraw(@PathVariable Long id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("amount");
@@ -43,12 +47,14 @@ public class AccountController {
         return ResponseEntity.ok(accountDto);
     }
 
+    // Get all account details from the bank
     @GetMapping("/allAccounts")
     public ResponseEntity<List<AccountDto>> getAllAccounts(){
         List<AccountDto> account = accountService.getAllAccounts();
         return ResponseEntity.ok(account);
     }
 
+    // Delete account by id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAccount(@PathVariable Long id){
         accountService.deleteAccount(id);

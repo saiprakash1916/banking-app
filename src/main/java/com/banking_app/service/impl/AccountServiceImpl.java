@@ -2,6 +2,7 @@ package com.banking_app.service.impl;
 
 import com.banking_app.dto.AccountDto;
 import com.banking_app.entity.Account;
+import com.banking_app.exception.AccountException;
 import com.banking_app.mapper.AccountMapper;
 import com.banking_app.respository.AccountRepository;
 import com.banking_app.service.AccountService;
@@ -30,14 +31,14 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto getAccountById(Long id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exits"));
+                .orElseThrow(() -> new AccountException("Account does not exits"));
         return AccountMapper.mapToAccountDto(account);
     }
 
     @Override
     public AccountDto deposit(Long id, double amount) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exits"));
+                .orElseThrow(() -> new AccountException("Account does not exits"));
         double total = account.getBalance() + amount;
         account.setBalance(total);
         Account savedAccount = accountRepository.save(account);
@@ -47,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto withdraw(Long id, double amount) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exits"));
+                .orElseThrow(() -> new AccountException("Account does not exits"));
         if (account.getBalance() < amount) {
             throw new RuntimeException("Insufficient Balance");
         }
@@ -66,7 +67,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccount(Long id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exits"));
+                .orElseThrow(() -> new AccountException("Account does not exits"));
        accountRepository.deleteById(id);
     }
 }
